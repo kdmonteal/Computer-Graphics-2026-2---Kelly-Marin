@@ -81,7 +81,16 @@ const axesHelper = new THREE.AxesHelper( 5 );
 scene.add( axesHelper );
 
 
+
 function animate( time ) {
   renderer.render( scene, camera );
   controls.update();
+
+  meshes.forEach( ( mesh ) => {
+    const speed = 0.0009;   
+    
+    mesh.rotation.x = time * speed;
+    mesh.rotation.y = time * speed;
+  });
+
 }
