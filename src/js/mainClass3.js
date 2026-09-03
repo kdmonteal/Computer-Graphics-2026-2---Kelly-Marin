@@ -94,3 +94,15 @@ function animate( time ) {
   });
 
 }
+
+function changeVisibilityObject() {
+    isWireframe = !isWireframe;
+    meshes.forEach( ( mesh ) => {
+        mesh.material.wireframe = isWireframe;
+
+        button.textContent = isWireframe ? 'Change Wireframe (true)' : 'Change Wireframe (false)';
+    });
+}
+
+const button = document.getElementById( 'chWirerframe' );
+button.addEventListener( 'click', changeVisibilityObject );
