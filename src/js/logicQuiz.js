@@ -1,58 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema Solar con Líneas de Órbita - Three.js</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: #050508;
-      font-family: Arial, sans-serif;
-    }
-    canvas {
-      display: block;
-    }
-    #ui-container {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 10;
-      background: rgba(0, 0, 0, 0.75);
-      padding: 12px 18px;
-      border-radius: 8px;
-      border: 1px solid #333;
-      color: #fff;
-    }
-    button {
-      background-color: #00A8CC;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background-color: #0088a6;
-    }
-  </style>
-</head>
-<body>
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-  <div id="ui-container">
-    <button id="toggle-anim">Activar / Pausar Animación</button>
-  </div>
-
-  <!-- CDN Three.js y OrbitControls -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-
-  <script>
-    // 1. ESCENA, CÁMARA Y RENDERIZADOR
+ 
+ // 1. ESCENA, CÁMARA Y RENDERIZADOR
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(
@@ -68,7 +18,7 @@
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     document.body.appendChild(renderer.domElement);
 
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
 
     // 2. ILUMINACIÓN (Luz en el centro del Sol)
@@ -191,6 +141,3 @@
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
-  </script>
-</body>
-</html>
