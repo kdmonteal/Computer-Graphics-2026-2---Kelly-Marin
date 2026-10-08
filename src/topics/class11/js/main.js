@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
 import {MTLLoader} from 'three/addons/loaders/MTLLoader.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -15,12 +16,15 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
-const ambientLight = new THREE.AmbientLight( 0xffffff, 0.4 );
+const ambientLight = new THREE.AmbientLight( 0xffffff, 0.5);
 scene.add( ambientLight );
 
-const light = new THREE.DirectionalLight( 0xffffff, 1.2 );
-light.position.set( 5, 10, 7 );
-scene.add( light );
+const pointLight = new THREE.PointLight( 0xffffff, 10, 300 );
+pointLight.position.set( 6, 2, 0 );
+scene.add( pointLight );
+const sphereSize = 1;
+const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+//scene.add( pointLightHelper );
 
 const controls = new OrbitControls( camera, renderer.domElement );
 camera.position.set( 0, -1.5, 9 );
@@ -59,9 +63,27 @@ window.addEventListener('resize', onWindowResize);
 
 
 
-// *******************************************
-// *******************************************
+// ************************************************
+// **************** OBJ Loader ********************
   const objLoader = new OBJLoader();
-  objLoader.load('./models/obj-mtl/avion.obj', (root) => {
+  
+
+   const mtlLoader = new MTLLoader();
+  mtlLoader.load('./models/obj-mtl/avion.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('./models/obj-mtl/avion.obj', (root) => {
     scene.add(root);
   });
+  });
+
+// ************************************************
+// **************** GLTF Loader ********************
+   const gltfLoader = new GLTFLoader();
+    const url = './models/gltf/avionAzul.gltf';
+    gltfLoader.load(url, (gltf) => {
+        const root = gltf.scene;
+        scene.add(root);
+
+        root.position.set(0, 0, 8);
+    });
