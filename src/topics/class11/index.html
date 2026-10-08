@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Model GLB</title>
 
+    <link rel="stylesheet" href="./css/main.css">
     <style>
-      body { margin: 0; }
+        body {
+            margin: 0;
+        }
     </style>
     <script type="importmap">
     {
@@ -17,7 +21,48 @@
     }
     </script>
 </head>
+
 <body>
+
+    <div class="choose-avatar">
+        <span class="title">Choose your avatar</span>
+        <div class="avatars-container">
+            <span class="left"></span>
+            <div class="avatars">
+                <div class="avatar-item">
+                    
+                     <div style="position: absolute; width: 200px; height: 200px;">
+                        <!-- El canvas ahora se pintará de forma transparente sobre la imagen del avatar -->
+                        <canvas id="mi-canvas-id" width="200" height="200"></canvas>
+                    </div>
+                    <span id="text-avatar">Choose</span>
+                </div>
+                <div class="avatar-item" style="background-image: url('https://i.ibb.co/0t3JTMz/avatar2.png');">
+                    <span id="text-avatar">Choose</span>
+                </div>
+                <div class="avatar-item" style="background-image: url('https://i.ibb.co/K08BjJx/avatar3.png');">
+                    <span id="text-avatar">Choose</span>
+                </div>
+                <div class="avatar-item" style="background-image: url('https://i.ibb.co/6XW1X2L/avatar4.png');">
+                    <span id="text-avatar">Choose</span>
+                </div>
+                <div class="avatar-item" style="background-image: url('https://i.ibb.co/DVfTxB2/avatar5.png');">
+                    <span id="text-avatar">Choose</span>
+                </div>
+                <div class="avatar-item" style="background-image: url('https://i.ibb.co/Bzvqgg3/avatar6.png');">
+                    <span id="text-avatar">Choose</span>
+                </div>
+                <div class="avatar-item" style="background-image: url('https://i.ibb.co/FDg3t8m/avatar7.png');">
+                    <span id="text-avatar">Choose</span>
+                </div>
+            </div>
+            <span class="right"></span>
+        </div>
+        <button class="button-simple">Home</button>
+    </div>
+
     <script type="module" src="./js/main.js"></script>
+    <script src="./js/slider.js"></script>
 </body>
+
 </html>

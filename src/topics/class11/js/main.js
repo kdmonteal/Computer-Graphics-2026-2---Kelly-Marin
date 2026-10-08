@@ -5,14 +5,28 @@ import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
 import {MTLLoader} from 'three/addons/loaders/MTLLoader.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
+// 1. Obtener el elemento canvas por su ID
+const miCanvas = document.getElementById('mi-canvas-id');
+
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 const backgroundColor = 0x0b0c10; // Dark background color
 scene.background = new THREE.Color( backgroundColor );
 
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
+// 2. IMPORTANTE: Activar alpha: true para que el fondo de Three.js sea transparente
+const renderer = new THREE.WebGLRenderer({ 
+    canvas: miCanvas, 
+    alpha: true 
+});
+
+// 3. Usar el tamaño estático (200x200) definido en tu HTML en lugar de window.innerWidth
+const ancho = miCanvas.width;   // Tomará los 200 de tu HTML
+const alto = miCanvas.height;   // Tomará los 200 de tu HTML
+
+renderer.setSize(ancho, alto);
+
+// 4. Asegurar que la cámara tenga la misma relación de aspecto cuadrada (200/200 = 1)
+const camera = new THREE.PerspectiveCamera(75, ancho / alto, 0.1, 1000);
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 
@@ -83,7 +97,7 @@ window.addEventListener('resize', onWindowResize);
     const url = './models/gltf/avionAzul.gltf';
     gltfLoader.load(url, (gltf) => {
         const root = gltf.scene;
-        scene.add(root);
+        //scene.add(root);
 
-        root.position.set(0, 0, 8);
+        //root.position.set(0, 0, 8);
     });
